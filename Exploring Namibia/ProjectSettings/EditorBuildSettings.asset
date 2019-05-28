@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: ea8ed8838c932fd48b5fd71fb4c328ea
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: e8c37d80b3da7c44c8da6ad93c9dc594
+  - enabled: 1
+    path: Assets/Scenes/National-Park.unity
+    guid: 15c837abe74eaef4e93c7acfd0c9407e
   m_configObjects: {}

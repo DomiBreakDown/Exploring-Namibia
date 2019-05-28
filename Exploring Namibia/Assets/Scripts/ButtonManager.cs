@@ -29,5 +29,17 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    //To call Village
+    public void OpenVillage()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    //To call National Park
+    public void OpenNationalPark()
+    {
+        SceneManager.LoadScene(5);
+    }
     
 }
