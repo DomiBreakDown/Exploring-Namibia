@@ -567,6 +567,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -587,10 +588,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 1ae5d83d-fc8f-4d06-8622-e8b9a8b7112b
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Exploring Namibia
+  organizationId: domibreakdown
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

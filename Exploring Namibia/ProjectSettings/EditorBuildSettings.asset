@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/National-Park.unity
     guid: 15c837abe74eaef4e93c7acfd0c9407e
+  - enabled: 1
+    path: Assets/Scenes/Rescue-Station.unity
+    guid: fc95a468a043164418e8c660f4dea71c
   m_configObjects: {}

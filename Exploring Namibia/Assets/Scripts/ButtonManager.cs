@@ -41,5 +41,11 @@ public class ButtonManager : MonoBehaviour
     {
         SceneManager.LoadScene(5);
     }
+
+    //To call Animal Rescue Station
+    public void OpenAnimalRescueStation()
+    {
+        SceneManager.LoadScene(6);
+    }
     
 }

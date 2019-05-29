@@ -112,7 +112,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &137322872
+--- !u!1001 &220807325
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -744,18 +744,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886673746}
   m_CullTransparentMesh: 0
---- !u!114 &888176460 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5344680024053139113, guid: 7fd2b8c6c579fa04c91533cbffaae334,
-    type: 3}
-  m_PrefabInstance: {fileID: 137322872}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ea6774bb3ea384a9e358cf3c9642e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1051547735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -800,6 +788,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b31d5b1d331b1eb45b357972cc5e2911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1081133764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5344680024053139113, guid: 7fd2b8c6c579fa04c91533cbffaae334,
+    type: 3}
+  m_PrefabInstance: {fileID: 220807325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ea6774bb3ea384a9e358cf3c9642e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1450455138
@@ -945,8 +945,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+    m_PressedColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1031,7 +1031,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 888176460}
+        - m_Target: {fileID: 1081133764}
           m_MethodName: OnMouseOver
           m_Mode: 1
           m_Arguments:
@@ -1048,7 +1048,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 888176460}
+        - m_Target: {fileID: 1081133764}
           m_MethodName: OnMouseExit
           m_Mode: 1
           m_Arguments:
