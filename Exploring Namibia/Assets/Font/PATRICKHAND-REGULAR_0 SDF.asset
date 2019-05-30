@@ -19,12 +19,12 @@ MonoBehaviour:
   m_fontInfo:
     Name: Patrick Hand
     PointSize: 49
-    Scale: 0
+    Scale: 1
     CharacterCount: 208
     LineHeight: 66.375
     Baseline: 0
     Ascender: 51.0625
-    CapHeight: 0
+    CapHeight: 32.5
     Descender: -15.3125
     CenterLine: 0
     SuperscriptOffset: 51.0625
@@ -34,7 +34,7 @@ MonoBehaviour:
     UnderlineThickness: 2.45
     strikethrough: 13
     strikethroughThickness: 2.45
-    TabWidth: 0
+    TabWidth: 112.5
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -43,10 +43,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 517
-    width: 0
-    height: 0
+    width: 11.25
+    height: 66.375
     xOffset: 0
-    yOffset: 0
+    yOffset: 51.0625
     xAdvance: 11.25
     scale: 1
   - id: 33
