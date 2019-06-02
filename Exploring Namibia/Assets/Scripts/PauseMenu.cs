@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
         optionsUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        pauseMenuUI.GetComponent<Animator>().enabled = true;
     }
 
     public void Pause()
@@ -43,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         optionsUI.SetActive(true);
+        pauseMenuUI.GetComponent<Animator>().enabled = false;
     }
 
     public void BackToPause()
