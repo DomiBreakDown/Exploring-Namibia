@@ -16,17 +16,6 @@ public class Options : MonoBehaviour
             volumeSlider.value = PlayerPrefs.GetFloat("volume");
     }
 
-    //To take the main theme music through all scenes
-    void Awake()
-    {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("music");
-        if(objs.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);

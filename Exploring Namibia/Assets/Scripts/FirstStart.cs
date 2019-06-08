@@ -14,6 +14,7 @@ public class FirstStart : MonoBehaviour
         {
             FirstTime = false;
             PlayerPrefs.SetFloat("volume", maxVolume);
+            PlayerPrefs.SetInt("minigame1", 0);
         }
     }
 }

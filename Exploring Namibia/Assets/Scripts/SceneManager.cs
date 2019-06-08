@@ -4,56 +4,71 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     public Button buttonMinigame1;
 
     //To call Main Menu
     public void OpenMainMenu()
     {
-        SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     //To Call Options from Main Menu
     public void OpenOptionsMainMenu()
     {
-        SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
     //To call Headquarters/Home
     public void OpenHeadquarter()
     {
-        SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     //To call Map
     public void OpenMap()
     {
-        SceneManager.LoadScene(3);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 
     //To call Village
     public void OpenVillage()
     {
-        SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
 
     //To call National Park
     public void OpenNationalPark()
     {
-        SceneManager.LoadScene(5);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     //To call Animal Rescue Station
     public void OpenAnimalRescueStation()
     {
-        SceneManager.LoadScene(6);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(6);
     }
 
     //To call Credits
     public void OpenCredits()
     {
-        SceneManager.LoadScene(7);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(7);
+    }
+
+    public void OpenMinigame01()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(8);
+    }
+
+    public void OpenProgress()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(9);
+    }
+
+    public void OpenIntro()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(10);
     }
 
     //For revealing Minigames when clicking on Minigame Button
@@ -67,5 +82,4 @@ public class ButtonManager : MonoBehaviour
             buttonMinigame1.gameObject.SetActive(false);
         }
     }
-    
 }

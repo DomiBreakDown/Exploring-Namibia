@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: fbe562440053ec3439055f057a2fdf2a
+  - enabled: 1
+    path: Assets/Scenes/Minigame01.unity
+    guid: 738cab09640897b4f8a8efe4314d7985
+  - enabled: 1
+    path: Assets/Scenes/Progress.unity
+    guid: d0179fb9926af6744b99a8b65cc6d261
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 535f5ad4f8de25847913b0aa080d68ad
   m_configObjects: {}

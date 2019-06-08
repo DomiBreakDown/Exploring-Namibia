@@ -1,40 +1,69 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rigid2D;
     private float x, y;
-    private readonly float speed = 10.0f;
+    private readonly float speed = 8.0f;
+    private int lifePoints = 10;
+    private int itemsCollected = 0;
+
+    private Rigidbody2D rigid2D;
+    private AudioSource audioSource;
+    private HUDManager hudManager;
 
     private void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>();
         rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         rigid2D.gravityScale = 0.0f;
-        rigid2D.drag = 10.0f; // removes inertia
+        rigid2D.drag = speed; // removes inertia
+
+        audioSource = GameObject.Find("HitObstacleAudio").GetComponent<AudioSource>();
+        hudManager = GameObject.Find("HUD").GetComponent<HUDManager>();
     }
 
     void Update()
     {
-        /* Movement with Mouse */
-        if (Input.GetMouseButton(0))
-        {
-            Vector2 mouseV = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            this.rigid2D.position = mouseV;
-        }
+        x = Input.GetAxisRaw("Horizontal");
+        y = Input.GetAxisRaw("Vertical");
 
-        /* Movement with Keyboard */
-        else
-        {
-            x = Input.GetAxisRaw("Horizontal");
-            y = Input.GetAxisRaw("Vertical");
+        Vector2 velocity = new Vector2(x, y);
+        velocity.Normalize();
+        velocity *= speed;
+        this.rigid2D.velocity = velocity;
+    }
 
-            Vector2 velocity = new Vector2(x, y);
-            velocity.Normalize();
-            velocity *= speed;
-            this.rigid2D.velocity = velocity;
+    public void HurtPlayer()
+    {
+        lifePoints--;
+        audioSource.Play(); // https://www.youtube.com/watch?v=NTnaMsGryJ4
+        hudManager.RemoveHeart();
+
+        if (lifePoints == 0)
+        {
+            hudManager.ShowScoreScreen(itemsCollected, lifePoints);
+            this.gameObject.SetActive(false);
         }
+    }
+
+    public void IncreaseItemsCollected()
+    {
+        itemsCollected++;
+        if(itemsCollected > 4)
+        {
+            hudManager.ShowScoreScreen(itemsCollected, lifePoints);
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void Reset()
+    {
+        lifePoints = 10;
+        itemsCollected = 0;
+        this.transform.position = new Vector3(0, -4);
+        this.transform.gameObject.SetActive(true);
     }
 }
