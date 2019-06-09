@@ -40,6 +40,9 @@ public class MiniGameManager : MonoBehaviour
 
     private void Start()
     {
+        backG1.transform.position = new Vector3(0, 0);
+        backG2.transform.position = new Vector3(0, 10.5f);
+
         Finished = false;
         iteration = 0;
     }
@@ -85,6 +88,8 @@ public class MiniGameManager : MonoBehaviour
 
     public void StartGame()
     {
+        backG1.transform.position = new Vector3(0, 0);
+        backG2.transform.position = new Vector3(0, 10.5f);
         Reset = true;
         playerController.Reset();
         HUDManager.Reset();
