@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
-    public Button buttonMinigame1;
-
     //To call Main Menu
     public void OpenMainMenu()
     {
@@ -69,17 +67,5 @@ public class SceneManager : MonoBehaviour
     public void OpenIntro()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(10);
-    }
-
-    //For revealing Minigames when clicking on Minigame Button
-    public void RevealMinigames()
-    {
-        if(buttonMinigame1.gameObject.activeSelf == false)
-        {
-            buttonMinigame1.gameObject.SetActive(true);
-        } else if(buttonMinigame1.gameObject.activeSelf == true)
-        {
-            buttonMinigame1.gameObject.SetActive(false);
-        }
     }
 }

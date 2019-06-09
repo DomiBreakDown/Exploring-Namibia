@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private float x, y;
     private readonly float speed = 8.0f;
-    private int lifePoints = 10;
+    private int lifePoints = 5;
     private int itemsCollected = 0;
 
     private Rigidbody2D rigid2D;
@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
     public void IncreaseItemsCollected()
     {
         itemsCollected++;
-        if(itemsCollected > 4)
+        hudManager.UpdateItemCounter(itemsCollected);
+        if(itemsCollected > 9)
         {
             hudManager.ShowScoreScreen(itemsCollected, lifePoints);
             miniGameManager.NextIteration();
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     public void Reset()
     {
-        lifePoints = 10;
+        lifePoints = 5;
         itemsCollected = 0;
         this.transform.position = new Vector3(0, -4);
         this.transform.gameObject.SetActive(true);

@@ -21,8 +21,9 @@ public class MiniGameManager : MonoBehaviour
     private static int iteration = 0;
     private readonly int goal = 3;
 
-    public int[] correctItemToBeCollected;
+    public int correctItemToBeCollected = 0;
     public bool Reset = false;
+    public bool Finished = false;
 
     private void Awake()
     {
@@ -32,15 +33,15 @@ public class MiniGameManager : MonoBehaviour
         backG1 = this.transform.GetChild(0).transform.gameObject;
         backG2 = this.transform.GetChild(1).transform.gameObject;
 
-        correctItemToBeCollected = new int[2];
-
-        // default values
-        correctItemToBeCollected[0] = 0;
-        correctItemToBeCollected[1] = 1;
-
         Physics2D.IgnoreLayerCollision(0, 10);
         Physics2D.IgnoreLayerCollision(8, 10);
         Physics2D.IgnoreLayerCollision(9, 10);
+    }
+
+    private void Start()
+    {
+        Finished = false;
+        iteration = 0;
     }
 
     private void Update()
@@ -49,23 +50,26 @@ public class MiniGameManager : MonoBehaviour
         {
             case 0:
                 HUDManager.UpdateStartGamePanel("Phase 1: Sammle Futter für einen Löwen");
-                correctItemToBeCollected[0] = 0;
-                correctItemToBeCollected[1] = 1;
+                correctItemToBeCollected = 0;
                 break;
             case 1:
                 HUDManager.UpdateStartGamePanel("Phase 2: Sammle Futter für ein Zebra");
-                correctItemToBeCollected[0] = 2;
-                correctItemToBeCollected[1] = -1;
+                correctItemToBeCollected = 1;
                 break;
             case 2:
                 HUDManager.UpdateStartGamePanel("Phase 3: Sammle Futter für einen Elefanten");
-                correctItemToBeCollected[0] = 3;
-                correctItemToBeCollected[1] = -1;
+                correctItemToBeCollected = 2;
                 break;
             default:
                 break;
         }
-        
+
+        if(iteration >= goal)
+        {
+            Finished = true;
+            PlayerPrefs.SetInt("minigame1", 1);
+        }
+
         MoveBackground();
     }
 
@@ -76,12 +80,7 @@ public class MiniGameManager : MonoBehaviour
 
     public bool CheckFinished()
     {
-        if(iteration >= goal)
-        {
-            PlayerPrefs.SetInt("minigame1", 1);
-            return true;
-        }
-        return false;
+        return Finished;
     }
 
     public void StartGame()
@@ -91,6 +90,7 @@ public class MiniGameManager : MonoBehaviour
         HUDManager.Reset();
         HUDManager.UpdateStartGamePanel(false);
         StartCoroutine(Countdown());
+        PauseMenu.gameIsPaused = false;
     }
 
     private IEnumerator Countdown()

@@ -7,8 +7,6 @@ public class ObstacleController : MonoBehaviour
     private readonly static int obstacleCount = 3;
     private readonly float minSpeed = 7.0f;
     private readonly float maxSpeed = 7.0f;
-    private readonly int itemLayer = 8;
-    private readonly int obstacleLayer = 9;
 
     private MiniGameManager miniGameManager;
     private PlayerController playerController;
@@ -48,16 +46,9 @@ public class ObstacleController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         /* Player gets hit */
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && this.gameObject.layer == 9)
         {
             playerController.HurtPlayer();
-            this.SpawnObstacle();
-        }
-        
-        /* Should prevent overlapping obstacles */
-        if(collision.gameObject.layer == itemLayer || collision.gameObject.layer == obstacleLayer)
-        {
-            Debug.Log("collision with: " + collision.gameObject.name);
             this.SpawnObstacle();
         }
     }

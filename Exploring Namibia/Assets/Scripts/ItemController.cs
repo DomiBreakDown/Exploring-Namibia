@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    private readonly static int spriteCount = 4;
+    private readonly static int spriteCount = 3;
 
     private readonly float minSpeed = 7.0f;
     private readonly float maxSpeed = 7.0f;
@@ -30,7 +30,7 @@ public class ItemController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = itemSprites[i];
 
-        if(i == miniGameManager.correctItemToBeCollected[0] || i == miniGameManager.correctItemToBeCollected[1])
+        if(i == miniGameManager.correctItemToBeCollected)
         {
             correctItem = true;
         }
@@ -57,7 +57,7 @@ public class ItemController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && this.gameObject.layer == 8)
         {
            if(correctItem)
             {
