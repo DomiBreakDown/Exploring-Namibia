@@ -44,7 +44,7 @@ public class ItemController : MonoBehaviour
     private Vector2 RndStartV()
     {
         float y = Random.Range(5.5f, 8.0f);
-        float x = Random.Range(-5.1f, 5.1f);
+        float x = Random.Range(-7.2f, 7.2f);
 
         return new Vector2(x, y);
     }

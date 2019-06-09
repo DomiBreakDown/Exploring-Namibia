@@ -16,8 +16,6 @@ public class ProgressMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("minigame1", 0);
-
         minigamesDone = PlayerPrefs.GetInt("minigame1");
         if (minigamesDone == 0)
         {

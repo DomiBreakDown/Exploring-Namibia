@@ -49,6 +49,7 @@ public class HUDManager : MonoBehaviour
 
     public void ShowScoreScreen(int itemsCollected, int remainingLifes)
     {
+        txtItemsCollected.gameObject.SetActive(true);
         if (remainingLifes > 0)
         {
             txtItemsCollected.gameObject.SetActive(true);
@@ -70,6 +71,7 @@ public class HUDManager : MonoBehaviour
     {
         txtSuccess.text = "Du hast Minispiel 1 Abgeschlossen";
         txtBtnNextPart.transform.parent.gameObject.SetActive(false);
+        txtItemsCollected.gameObject.SetActive(false);
         ScoreScreen.SetActive(true);
     }
 

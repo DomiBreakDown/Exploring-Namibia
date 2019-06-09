@@ -15,7 +15,7 @@ public class HQControl : MonoBehaviour
     void Start()
     {
         minigamesDone = PlayerPrefs.GetInt("minigame1");
-        if (1 == maxMinigames)
+        if (minigamesDone == maxMinigames)
         {
             endGameButton.gameObject.SetActive(true);
         }

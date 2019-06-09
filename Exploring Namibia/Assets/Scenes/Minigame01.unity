@@ -414,7 +414,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -807,7 +807,7 @@ Transform:
   m_GameObject: {fileID: 543017569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5.5, z: 0}
-  m_LocalScale: {x: 12.5, y: 1, z: 1}
+  m_LocalScale: {x: 17, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078635502}
   m_RootOrder: 3
@@ -939,8 +939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 600, y: 170}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 656.8, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673258667
 MonoBehaviour:
@@ -963,7 +963,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "In diesem Minispiel ist es deine Aufgabe die richtige Nahrung f\xFCr das
-    richtige Tier einzusammeln."
+    richtige Tier einzusammeln. Du kannst den Wagen entweder mit WASD oder mit den
+    Pfeiltasten steuern."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2b54d12c21251e4584361caee0a781f, type: 2}
   m_sharedMaterial: {fileID: 21063753773077370, guid: a2b54d12c21251e4584361caee0a781f,
@@ -1033,12 +1034,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 673258667}
-    characterCount: 97
+    characterCount: 169
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 15
+    spaceCount: 26
+    wordCount: 27
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2402,7 +2403,7 @@ Transform:
   m_GameObject: {fileID: 1020747135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4, z: 0}
-  m_LocalScale: {x: 12.5, y: 1, z: 1}
+  m_LocalScale: {x: 17, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078635502}
   m_RootOrder: 2
@@ -2889,7 +2890,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5602,67 +5603,67 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 2118055129}
-    m_ColliderPaths:
-    - - X: -52500029
-        Y: -50000000
-      - X: -52500029
-        Y: 50000000
-      - X: -62500000
-        Y: 49999971
-      - X: -62499971
-        Y: -50000000
-  - m_Collider: {fileID: 2113220278}
-    m_ColliderPaths:
-    - - X: 62499971
-        Y: -50000000
-      - X: 62499971
-        Y: 50000000
-      - X: 52500000
-        Y: 49999971
-      - X: 52500029
-        Y: -50000000
   - m_Collider: {fileID: 1020747137}
     m_ColliderPaths:
-    - - X: 62499971
+    - - X: 84999971
         Y: 35000000
-      - X: 62499971
+      - X: 84999971
         Y: 45000000
-      - X: -62500000
+      - X: -85000000
         Y: 44999971
-      - X: -62499971
+      - X: -84999971
         Y: 35000000
+  - m_Collider: {fileID: 2113220278}
+    m_ColliderPaths:
+    - - X: 84999971
+        Y: -50000000
+      - X: 84999971
+        Y: 50000000
+      - X: 75000000
+        Y: 49999971
+      - X: 75000029
+        Y: -50000000
+  - m_Collider: {fileID: 2118055129}
+    m_ColliderPaths:
+    - - X: -75000029
+        Y: -50000000
+      - X: -75000029
+        Y: 50000000
+      - X: -85000000
+        Y: 49999971
+      - X: -84999971
+        Y: -50000000
   - m_Collider: {fileID: 543017571}
     m_ColliderPaths:
-    - - X: 62499971
+    - - X: 84999971
         Y: -60000000
-      - X: 62499971
+      - X: 84999971
         Y: -50000000
-      - X: -62500000
+      - X: -85000000
         Y: -50000029
-      - X: -62499971
+      - X: -84999971
         Y: -60000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 5.25, y: 4.999997}
-      - {x: 5.25, y: 4.5}
-      - {x: -5.250003, y: 4.499997}
-      - {x: -5.250003, y: 5}
-      - {x: -6.25, y: 4.999997}
-      - {x: -6.25, y: 4.499997}
-      - {x: -6.25, y: 4.499997}
-      - {x: -6.25, y: 4.444442}
-      - {x: -6.249997, y: -5}
-      - {x: -5.250003, y: -5}
-      - {x: -5.250003, y: 3.5}
-      - {x: 5.2500005, y: 3.5}
-      - {x: 5.250003, y: -5}
-      - {x: 6.249997, y: -5}
-      - {x: 6.249997, y: 5}
-    - - {x: 6.249997, y: -5}
-      - {x: -6.25, y: -5.000003}
-      - {x: -6.249997, y: -6}
-      - {x: 6.249997, y: -6}
+    - - {x: 7.5, y: 4.999997}
+      - {x: 7.5, y: 4.5}
+      - {x: -7.5000033, y: 4.499997}
+      - {x: -7.5000033, y: 5}
+      - {x: -8.5, y: 4.999997}
+      - {x: -8.5, y: 4.499997}
+      - {x: -8.5, y: 4.499997}
+      - {x: -8.5, y: 4.444442}
+      - {x: -8.499997, y: -5}
+      - {x: -7.5000033, y: -5}
+      - {x: -7.5000033, y: 3.5}
+      - {x: 7.5, y: 3.5}
+      - {x: 7.5000033, y: -5}
+      - {x: 8.499997, y: -5}
+      - {x: 8.499997, y: 5}
+    - - {x: 8.499997, y: -5}
+      - {x: -8.5, y: -5.000003}
+      - {x: -8.499997, y: -6}
+      - {x: 8.499997, y: -6}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!50 &2078635501
@@ -5803,7 +5804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113220276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.75, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 2078635502}
@@ -5860,7 +5861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118055127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: 0, z: 0}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 2078635502}
