@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     private int itemsCollected = 0;
 
     private Rigidbody2D rigid2D;
-    private AudioSource audioSource;
+    private AudioSource obstacleAudioSource;
+    private AudioSource startEngineAudioSource;
     private HUDManager hudManager;
+    private MiniGameManager miniGameManager;
 
     private void Start()
     {
@@ -21,8 +23,10 @@ public class PlayerController : MonoBehaviour
         rigid2D.gravityScale = 0.0f;
         rigid2D.drag = speed; // removes inertia
 
-        audioSource = GameObject.Find("HitObstacleAudio").GetComponent<AudioSource>();
+        obstacleAudioSource = GameObject.Find("HitObstacleAudio").GetComponent<AudioSource>();
+        startEngineAudioSource = this.transform.GetChild(0).GetComponent<AudioSource>();
         hudManager = GameObject.Find("HUD").GetComponent<HUDManager>();
+        miniGameManager = GameObject.Find("Minigame").GetComponent<MiniGameManager>();
     }
 
     void Update()
@@ -39,7 +43,7 @@ public class PlayerController : MonoBehaviour
     public void HurtPlayer()
     {
         lifePoints--;
-        audioSource.Play(); // https://www.youtube.com/watch?v=NTnaMsGryJ4
+        obstacleAudioSource.Play(); // https://www.youtube.com/watch?v=NTnaMsGryJ4
         hudManager.RemoveHeart();
 
         if (lifePoints == 0)
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if(itemsCollected > 4)
         {
             hudManager.ShowScoreScreen(itemsCollected, lifePoints);
+            miniGameManager.NextIteration();
             this.gameObject.SetActive(false);
         }
     }
@@ -65,5 +70,15 @@ public class PlayerController : MonoBehaviour
         itemsCollected = 0;
         this.transform.position = new Vector3(0, -4);
         this.transform.gameObject.SetActive(true);
+    }
+
+    public void StartEngine()
+    {
+        startEngineAudioSource.Play(); // https://freesound.org/people/Diramus/sounds/351421/
+    }
+
+    public int GetLifepoints()
+    {
+        return lifePoints;
     }
 }

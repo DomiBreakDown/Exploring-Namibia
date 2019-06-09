@@ -12,6 +12,7 @@ public class HUDManager : MonoBehaviour
     private Image[] heartsFilled = new Image[heartCount];
     private Image[] heartsEmpty = new Image[heartCount];
     private GameObject HUD;
+    private GameObject startGamePanel;
     private GameObject ScoreScreen;
     private TextMeshProUGUI txtSuccess, txtItemsCollected, txtBtnNextPart, txtCountdown;
     private GameObject btnBackToHQ;
@@ -20,6 +21,7 @@ public class HUDManager : MonoBehaviour
     private void Start()
     {
         HUD = GameObject.Find("HUD").gameObject;
+        startGamePanel = GameObject.Find("Panel-StartGame");
         ScoreScreen = HUD.transform.GetChild(1).gameObject;
         txtSuccess = ScoreScreen.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         txtItemsCollected = ScoreScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
@@ -31,6 +33,7 @@ public class HUDManager : MonoBehaviour
         miniGameManager = GameObject.Find("Minigame").GetComponent<MiniGameManager>();
 
         InstantiateHearts();
+        PauseGame();
     }
 
     public void RemoveHeart()
@@ -47,17 +50,16 @@ public class HUDManager : MonoBehaviour
     {
         if (remainingLifes > 0)
         {
+            txtItemsCollected.gameObject.SetActive(true);
             txtSuccess.text = "Du hast es geschafft!";
             txtItemsCollected.text = "Du hast alle " + itemsCollected + " Stück Nahrung gesammelt.";
             txtBtnNextPart.text = "Weiter";
-            miniGameManager.Succeeded(true);
         }
         else
         {
             txtSuccess.text = "Du hast es nicht geschafft!";
             txtBtnNextPart.text = "Noch mal";
             txtItemsCollected.enabled = false;
-            miniGameManager.Succeeded(false);
         }
         
         ScoreScreen.SetActive(true);
@@ -68,14 +70,32 @@ public class HUDManager : MonoBehaviour
         txtSuccess.text = "Du hast Minispiel 1 Abgeschlossen";
         txtBtnNextPart.transform.parent.gameObject.SetActive(false);
         btnBackToHQ.SetActive(true);
-
         ScoreScreen.SetActive(true);
     }
 
     public void CloseScoreScreen()
     {
         ScoreScreen.SetActive(false);
-        miniGameManager.NextIteration();
+        if(miniGameManager.CheckFinished())
+        {
+            ShowEndScreen();
+        }
+        else
+        {
+            startGamePanel.SetActive(true);
+        }
+        
+        PauseGame();
+    }
+
+    public void UpdateStartGamePanel(string explanation)
+    {
+        startGamePanel.transform.GetChild(2).transform.gameObject.GetComponent<TextMeshProUGUI>().text = explanation;
+    }
+
+    public void UpdateStartGamePanel(bool active)
+    {
+        startGamePanel.SetActive(active);
     }
 
     public void Reset()
@@ -111,5 +131,11 @@ public class HUDManager : MonoBehaviour
         {
             txtCountdown.transform.gameObject.SetActive(false);
         }
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+        PauseMenu.gameIsPaused = true;
     }
 }

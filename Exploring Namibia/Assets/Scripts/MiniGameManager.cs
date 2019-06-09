@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
-    private GameObject startGamePanel;
-    private TextMeshProUGUI txtObjective;
+    // Bugs:
+
+    // Nach dem Abschließen von Minispiel erneut Minispiel starten: 
+    //    -> HUDManager:  
+    //          heartsFilled[i] = HUD.transform.GetChild(0).GetChild(j).gameObject.GetComponent<Image>(); 
+    //          index out of bounds
+
+    // ESC -> Zurück zur bleibe -> zurück zum Minispiel : Spiel wird nicht wieder von vorne angefangen
+
     private PlayerController playerController;
     private HUDManager HUDManager;
     private GameObject backG1, backG2;
 
     private static int iteration = 0;
     private readonly int goal = 3;
-    private static bool started = false;
-    private static bool starting = false;
-    private bool success = false;
 
     public int[] correctItemToBeCollected;
+    public bool Reset = false;
 
     private void Awake()
     {
-        startGamePanel = GameObject.Find("Panel-StartGame");
-        txtObjective = startGamePanel.transform.GetChild(2).transform.gameObject.GetComponent<TextMeshProUGUI>();
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         HUDManager = GameObject.Find("HUD").GetComponent<HUDManager>();
 
@@ -45,98 +48,68 @@ public class MiniGameManager : MonoBehaviour
         switch (iteration)
         {
             case 0:
-                txtObjective.text = "Phase 1: Sammle Futter für einen Löwen";
+                HUDManager.UpdateStartGamePanel("Phase 1: Sammle Futter für einen Löwen");
                 correctItemToBeCollected[0] = 0;
                 correctItemToBeCollected[1] = 1;
                 break;
             case 1:
-                txtObjective.text = "Phase 2: Sammle Futter für ein Zebra";
+                HUDManager.UpdateStartGamePanel("Phase 2: Sammle Futter für ein Zebra");
                 correctItemToBeCollected[0] = 2;
                 correctItemToBeCollected[1] = -1;
                 break;
             case 2:
-                txtObjective.text = "Phase 3: Sammle Futter für einen Elefanten";
+                HUDManager.UpdateStartGamePanel("Phase 3: Sammle Futter für einen Elefanten");
                 correctItemToBeCollected[0] = 3;
                 correctItemToBeCollected[1] = -1;
                 break;
             default:
                 break;
         }
-
-        ManagePause();
+        
         MoveBackground();
-    }
-
-    private void ManagePause()
-    {
-        if(!started)
-        {
-            startGamePanel.SetActive(true);
-            PauseMenu.gameIsPaused = true;
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            startGamePanel.SetActive(false);
-            PauseMenu.gameIsPaused = false;
-            Time.timeScale = 1.0f;
-        }
-
-        if(starting)
-        {
-            Time.timeScale = 0.001f;
-        }
     }
 
     public void NextIteration()
     {
-        if(success)
-        {
-            iteration++;
-            if (iteration >= goal)
-            {
-                PlayerPrefs.SetInt("minigame1", 1);
-                HUDManager.ShowEndScreen();
-            }
-            else
-            {
-                started = false;
-            }
-        }
-        else
-        {
-            started = false;
-        }
-        
+        iteration++;
     }
 
-    public void Succeeded(bool success)
+    public bool CheckFinished()
     {
-        this.success = success;
+        if(iteration >= goal)
+        {
+            PlayerPrefs.SetInt("minigame1", 1);
+            return true;
+        }
+        return false;
     }
 
     public void StartGame()
     {
+        Reset = true;
         playerController.Reset();
         HUDManager.Reset();
-        started = true;
+        HUDManager.UpdateStartGamePanel(false);
         StartCoroutine(Countdown());
-        starting = true;
     }
 
     private IEnumerator Countdown()
     {
+        playerController.StartEngine();
+        Time.timeScale = 0.001f;
+        
         int c = 3;
         while (c > 0)
         {
             HUDManager.ShowCountdown(c);
-            yield return new WaitForSeconds(0.001f);
             c--;
+            yield return new WaitForSeconds(0.001f);
+            
         }
 
         HUDManager.ShowCountdown(0);
-        starting = false;
-        started = true;
+        Time.timeScale = 1f;
+        Reset = false;
     }
 
     private void MoveBackground()

@@ -9,18 +9,15 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject optionsUI;
 
-    // Update is called once per frame
-    void Update()
+    public void PauseButton()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (gameIsPaused)
         {
-            if (gameIsPaused)
-            {
-                Resume();
-            } else
-            {
-                Pause();
-            }
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 
@@ -57,5 +54,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        gameIsPaused = false;
     }
 }

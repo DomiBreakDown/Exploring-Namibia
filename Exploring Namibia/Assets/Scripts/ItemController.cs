@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    private static int itemCounter = 0;
-    private static int spriteCount = 4;
+    private readonly static int spriteCount = 4;
 
     private readonly float minSpeed = 7.0f;
     private readonly float maxSpeed = 7.0f;
@@ -24,7 +23,7 @@ public class ItemController : MonoBehaviour
         miniGameManager = GameObject.Find("Minigame").GetComponent<MiniGameManager>();
         audioSource = GameObject.Find("PickupAudio").GetComponent<AudioSource>();
 
-        this.gameObject.name = "item_"; ;
+        this.gameObject.name = "item";
         this.transform.position = RndStartV();
 
         int i = RndSpriteIndex();
@@ -44,7 +43,7 @@ public class ItemController : MonoBehaviour
 
     private Vector2 RndStartV()
     {
-        float y = Random.Range(5.0f, 8.0f);
+        float y = Random.Range(5.5f, 8.0f);
         float x = Random.Range(-5.1f, 5.1f);
 
         return new Vector2(x, y);
@@ -52,7 +51,6 @@ public class ItemController : MonoBehaviour
 
     private void SpawnItem()
     {
-        ++itemCounter;
         Instantiate(this.gameObject);
         Destroy(this.gameObject);
     }
@@ -77,6 +75,11 @@ public class ItemController : MonoBehaviour
 
     void Update()
     {
+        if(miniGameManager.Reset)
+        {
+            this.SpawnItem();
+        }
+
         if (GameObject.FindWithTag("Player") != null)
         {
             playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();

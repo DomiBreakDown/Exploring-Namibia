@@ -9,7 +9,8 @@ public class ObstacleController : MonoBehaviour
     private readonly float maxSpeed = 7.0f;
     private readonly int itemLayer = 8;
     private readonly int obstacleLayer = 9;
-    
+
+    private MiniGameManager miniGameManager;
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
 
@@ -17,6 +18,7 @@ public class ObstacleController : MonoBehaviour
 
     private void Start()
     {
+        miniGameManager = GameObject.Find("Minigame").GetComponent<MiniGameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = obstacles[RndSpriteIndex()];
 
@@ -31,7 +33,7 @@ public class ObstacleController : MonoBehaviour
 
     private Vector2 RndStartV()
     {
-        float y = Random.Range(5.0f, 7.0f);
+        float y = Random.Range(5.5f, 7.0f);
         float x = Random.Range(-5.1f, 5.1f);
 
         return new Vector2(x, y);
@@ -62,6 +64,12 @@ public class ObstacleController : MonoBehaviour
 
     private void Update()
     {
+        if (miniGameManager.Reset)
+        {
+            this.SpawnObstacle();
+        }
+
+
         if (GameObject.FindWithTag("Player") != null)
         {
             playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
