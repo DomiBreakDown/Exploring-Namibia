@@ -68,4 +68,9 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(10);
     }
+
+    public void OpenSecretSettings()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(11);
+    }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class ObstacleController : MonoBehaviour
 {
     private readonly static int obstacleCount = 3;
-    private readonly float minSpeed = 7.0f;
-    private readonly float maxSpeed = 7.0f;
+    private readonly float minSpeed = 5.0f;
+    private readonly float maxSpeed = 5.0f;
 
     private MiniGameManager miniGameManager;
     private PlayerController playerController;

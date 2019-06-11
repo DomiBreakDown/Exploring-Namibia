@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float x, y;
-    private readonly float speed = 8.0f;
+    private readonly float speed = 5.0f;
     private int lifePoints = 5;
     private int itemsCollected = 0;
 

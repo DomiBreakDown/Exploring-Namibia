@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HQControl : MonoBehaviour
 {
     private int minigamesDone = 0;
-    private int maxMinigames = 1;
+    private int maxMinigames = 3;
     private static bool firstTime = true;
     public Button endGameButton;
     public GameObject startupPanel;
@@ -14,7 +14,7 @@ public class HQControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        minigamesDone = PlayerPrefs.GetInt("minigame1");
+        minigamesDone = PlayerPrefs.GetInt("minigame1") + PlayerPrefs.GetInt("minigame2") + PlayerPrefs.GetInt("minigame3");
         if (minigamesDone == maxMinigames)
         {
             endGameButton.gameObject.SetActive(true);

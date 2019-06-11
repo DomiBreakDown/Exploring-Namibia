@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OutlineButton : MonoBehaviour
 {
     public Button button;
-
+    
     public void OnMouseOver()
     {
         button.GetComponent<Outline>().enabled = true;

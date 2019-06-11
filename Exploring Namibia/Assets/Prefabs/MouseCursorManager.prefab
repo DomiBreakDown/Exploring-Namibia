@@ -45,5 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultCursor: {fileID: 2800000, guid: 7cd41016dde3e6a4291decdb1841916d, type: 3}
   handCursor: {fileID: 2800000, guid: a7026cc83469f284f8d5c54dafa583e5, type: 3}
+  warningCursor: {fileID: 2800000, guid: bead78763165890499a1c4484a08d302, type: 3}
+  checkCursor: {fileID: 2800000, guid: 744f1d8d3ae07b54a8ebfe81db237715, type: 3}
   curMode: 0
   hotSpot: {x: 0, y: 0}

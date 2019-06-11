@@ -6,8 +6,8 @@ public class ItemController : MonoBehaviour
 {
     private readonly static int spriteCount = 3;
 
-    private readonly float minSpeed = 7.0f;
-    private readonly float maxSpeed = 7.0f;
+    private readonly float minSpeed = 5.0f;
+    private readonly float maxSpeed = 5.0f;
 
     private bool correctItem = false;
 

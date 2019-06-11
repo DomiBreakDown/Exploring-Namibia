@@ -119,7 +119,7 @@ public class MiniGameManager : MonoBehaviour
 
     private void MoveBackground()
     {
-        float speed = 7f;
+        float speed = 5f;
         float yThreshold = -10.5f;
         Vector3 startV = new Vector3(0, 10.5f);
 

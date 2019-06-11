@@ -6,6 +6,8 @@ public class ChangeMouseCursor : MonoBehaviour
 {
     public Texture2D defaultCursor;
     public Texture2D handCursor;
+    public Texture2D warningCursor;
+    public Texture2D checkCursor;
     public CursorMode curMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
@@ -14,16 +16,6 @@ public class ChangeMouseCursor : MonoBehaviour
     {
         Cursor.SetCursor(defaultCursor, hotSpot, curMode);
     }
-
-    //For Hand Cursor on Objects with a tag (just add another if with the new tag and cursor)
-    public void OnMouseEnter()
-    {
-        if(gameObject.tag == "hand")
-        {
-            Cursor.SetCursor(handCursor, hotSpot, curMode);
-        }
-    }
-
 
     //For Default Cursor when leaving a Object that changed the Cursor
     public void OnMouseExit()
@@ -35,5 +27,15 @@ public class ChangeMouseCursor : MonoBehaviour
     public void OnMouseOver()
     {
         Cursor.SetCursor(handCursor, hotSpot, curMode);
+    }
+
+    public void WarningCursor()
+    {
+        Cursor.SetCursor(warningCursor, hotSpot, curMode);
+    }
+
+    public void CheckCursor()
+    {
+        Cursor.SetCursor(checkCursor, hotSpot, curMode);
     }
 }
