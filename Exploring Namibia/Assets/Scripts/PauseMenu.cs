@@ -9,6 +9,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject optionsUI;
 
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        if(GameObject.Find("Audio") != null)
+        {
+            audioManager = GameObject.Find("Audio").GetComponent<AudioManager>();
+        }
+    }
+
     public void PauseButton()
     {
         if (gameIsPaused)
@@ -28,6 +38,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         gameIsPaused = false;
         pauseMenuUI.GetComponent<Animator>().enabled = true;
+
+        if (audioManager != null)
+        {
+            audioManager.ResumeAudio();
+        }
     }
 
     public void Pause()
@@ -35,6 +50,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+
+        if(audioManager != null)
+        {
+            audioManager.PauseAudio();
+        }
     }
 
     public void Options()

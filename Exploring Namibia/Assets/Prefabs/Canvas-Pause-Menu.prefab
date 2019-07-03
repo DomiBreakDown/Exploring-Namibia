@@ -847,7 +847,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1279841382409386239
 MonoBehaviour:
@@ -930,6 +930,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultCursor: {fileID: 2800000, guid: 7cd41016dde3e6a4291decdb1841916d, type: 3}
   handCursor: {fileID: 2800000, guid: a7026cc83469f284f8d5c54dafa583e5, type: 3}
+  warningCursor: {fileID: 0}
+  checkCursor: {fileID: 0}
   curMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!114 &6506552340443976048

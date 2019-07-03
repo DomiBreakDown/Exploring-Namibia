@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    private readonly static int obstacleCount = 3;
-    private readonly float minSpeed = 5.0f;
-    private readonly float maxSpeed = 5.0f;
+    private const int OBSTACLE_SPRITE_COUNT = 3;
+    private const float MIN_SPEED = 5.0f; // minimum speed of the obstacle when falling
+    private const float MAX_SPEED = 5.0f; // maximum speed of the obstacle when falling
+    private const float Y_THRESHOLD = -5.5f; // Defines when the obstacle will despawn
 
     private MiniGameManager miniGameManager;
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
 
-    public Sprite[] obstacles = new Sprite[obstacleCount];
+    public Sprite[] obstacles = new Sprite[OBSTACLE_SPRITE_COUNT];
 
     private void Start()
     {
@@ -26,13 +27,13 @@ public class ObstacleController : MonoBehaviour
 
     private int RndSpriteIndex()
     {
-        return (int)Random.Range(0, obstacleCount);
+        return (int)Random.Range(0, OBSTACLE_SPRITE_COUNT);
     }
 
     private Vector2 RndStartV()
     {
-        float y = Random.Range(5.5f, 8.0f);
-        float x = Random.Range(-7.2f, 7.2f);
+        float y = Random.Range(MiniGameManager.Y_MIN_POS, MiniGameManager.Y_MAX_POS);
+        float x = Random.Range(-MiniGameManager.X_BARRIER_POS, MiniGameManager.X_BARRIER_POS);
 
         return new Vector2(x, y);
     }
@@ -45,8 +46,7 @@ public class ObstacleController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /* Player gets hit */
-        if (collision.gameObject.tag == "Player" && this.gameObject.layer == 9)
+        if (collision.gameObject.tag == "Player")
         {
             playerController.HurtPlayer();
             this.SpawnObstacle();
@@ -60,16 +60,14 @@ public class ObstacleController : MonoBehaviour
             this.SpawnObstacle();
         }
 
-
         if (GameObject.FindWithTag("Player") != null)
         {
             playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         }
 
+        this.transform.position += new Vector3(0, -Random.Range(MIN_SPEED, MAX_SPEED)) * Time.deltaTime;
 
-        this.transform.position += new Vector3(0, -Random.Range(minSpeed, maxSpeed)) * Time.deltaTime;
-
-        if (this.transform.position.y < -5.5f)
+        if (this.transform.position.y < Y_THRESHOLD)
         {
             this.SpawnObstacle();
         }

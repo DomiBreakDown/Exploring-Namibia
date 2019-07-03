@@ -2,40 +2,37 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MiniGameManager : MonoBehaviour
 {
-    // Bugs:
-
-    // Nach dem Abschließen von Minispiel erneut Minispiel starten: 
-    //    -> HUDManager:  
-    //          heartsFilled[i] = HUD.transform.GetChild(0).GetChild(j).gameObject.GetComponent<Image>(); 
-    //          index out of bounds
-
-    // ESC -> Zurück zur bleibe -> zurück zum Minispiel : Spiel wird nicht wieder von vorne angefangen
+    public const float X_BARRIER_POS = 7.2f; // position of the collider on the sides of the arena
+    public const float Y_MIN_POS = 5.5f; // minimum position of the area where items/obstacles will spawn
+    public const float Y_MAX_POS = 10.0f; // maximum position of the area where items/obstacles will spawn
 
     private PlayerController playerController;
-    private HUDManager HUDManager;
+    private HUDManagerMinigame01 HUDManager;
+    private PauseMenu pauseMenu;
+    private SceneManager sceneManager;
+
     private GameObject backG1, backG2;
 
-    private static int iteration = 0;
-    private readonly int goal = 3;
+    private static int iteration; // current iteration
+    private const int GOAL = 3; // number of iterations (needs to stay on 3 unless switch case on line 56 is changed)
 
     public int correctItemToBeCollected = 0;
     public bool Reset = false;
-    public bool Finished = false;
+    private bool finished = false;
 
     private void Awake()
     {
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        HUDManager = GameObject.Find("HUD").GetComponent<HUDManager>();
+        HUDManager = GameObject.Find("HUD").GetComponent<HUDManagerMinigame01>();
+        pauseMenu = GameObject.Find("Canvas-Pause-Menu").GetComponent<PauseMenu>();
+        sceneManager = GameObject.Find("SceneManagerScript").GetComponent<SceneManager>();
 
         backG1 = this.transform.GetChild(0).transform.gameObject;
         backG2 = this.transform.GetChild(1).transform.gameObject;
-
-        Physics2D.IgnoreLayerCollision(0, 10);
-        Physics2D.IgnoreLayerCollision(8, 10);
-        Physics2D.IgnoreLayerCollision(9, 10);
     }
 
     private void Start()
@@ -43,73 +40,110 @@ public class MiniGameManager : MonoBehaviour
         backG1.transform.position = new Vector3(0, 0);
         backG2.transform.position = new Vector3(0, 10.5f);
 
-        Finished = false;
+        finished = false;
         iteration = 0;
+        HUDManager.UpdateStartGamePanel("Phase 1: Sammle Futter für die Löwen");
     }
 
     private void Update()
     {
-        switch (iteration)
-        {
-            case 0:
-                HUDManager.UpdateStartGamePanel("Phase 1: Sammle Futter für einen Löwen");
-                correctItemToBeCollected = 0;
-                break;
-            case 1:
-                HUDManager.UpdateStartGamePanel("Phase 2: Sammle Futter für ein Zebra");
-                correctItemToBeCollected = 1;
-                break;
-            case 2:
-                HUDManager.UpdateStartGamePanel("Phase 3: Sammle Futter für einen Elefanten");
-                correctItemToBeCollected = 2;
-                break;
-            default:
-                break;
-        }
-
-        if(iteration >= goal)
-        {
-            Finished = true;
-            PlayerPrefs.SetInt("minigame1", 1);
-        }
-
         MoveBackground();
     }
 
     public void NextIteration()
     {
-        iteration++;
+        ++iteration;
+
+        if(iteration == 1)
+        {
+            HUDManager.UpdateStartGamePanel("Phase 2: Sammle Futter für die Zebras");
+            correctItemToBeCollected = 1;
+        }
+        else if(iteration == 2)
+        {
+            HUDManager.UpdateStartGamePanel("Phase 3: Sammle Futter für die Warzenschweine");
+            correctItemToBeCollected = 2;
+        }
+        else // (iteration >= GOAL)
+        {
+            finished = true;
+            PlayerPrefs.SetInt("minigame1", 1);
+        }
     }
 
     public bool CheckFinished()
     {
-        return Finished;
+        return finished;
+    }
+
+    public void ShowIntroduction()
+    {
+        if(iteration < 1)
+        {
+            HUDManager.ShowStartGamePanel(false);
+            HUDManager.ShowIntroScreen(true);
+        }
+        else
+        {
+            StartGame();
+        }
+    }
+
+    public void PauseGame(bool pausing)
+    {
+        if(pausing)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
+    }
+
+
+    public void Retry()
+    {
+        ResetGame();
+        HUDManager.ShowStartGamePanel(true);
+        PauseGame(true);
+    }
+
+    private void ResetGame()
+    {
+        Reset = true;
+        playerController.Reset();
+        HUDManager.Reset();
     }
 
     public void StartGame()
     {
         backG1.transform.position = new Vector3(0, 0);
         backG2.transform.position = new Vector3(0, 10.5f);
-        Reset = true;
-        playerController.Reset();
-        HUDManager.Reset();
-        HUDManager.UpdateStartGamePanel(false);
+        HUDManager.ShowStartGamePanel(false);
+        HUDManager.ShowIntroScreen(false);
+        ResetGame();
+        PauseGame(false);
         StartCoroutine(Countdown());
-        PauseMenu.gameIsPaused = false;
+    }
+
+    public void ExitGame()
+    {
+        ResetGame();
+        sceneManager.OpenMap();
     }
 
     private IEnumerator Countdown()
     {
         playerController.StartEngine();
-        Time.timeScale = 0.001f;
         
         int c = 3;
         while (c > 0)
         {
+            Time.timeScale = 0.001f;
             HUDManager.ShowCountdown(c);
             c--;
             yield return new WaitForSeconds(0.001f);
-            
         }
 
         HUDManager.ShowCountdown(0);

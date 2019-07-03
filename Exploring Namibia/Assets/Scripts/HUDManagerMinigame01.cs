@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 using TMPro;
 
-public class HUDManager : MonoBehaviour
+public class HUDManagerMinigame01 : MonoBehaviour
 {
-    private readonly static int heartCount = 5;
-    private static int currHeartCount = heartCount;
+    private const int HEART_COUNT = PlayerController.LIFE_POINTS;
+    private static int currHeartCount = HEART_COUNT;
 
-    private GameObject[] heartsFilled = new GameObject[heartCount];
-    private GameObject[] heartsEmpty = new GameObject[heartCount];
+    private GameObject[] heartsFilled = new GameObject[HEART_COUNT];
+    private GameObject[] heartsEmpty = new GameObject[HEART_COUNT];
     private GameObject HUD;
-    private GameObject startGamePanel;
+    private GameObject startGamePanel, introPanel, deathPanel;
     private GameObject ScoreScreen;
     private TextMeshProUGUI txtSuccess, txtItemsCollected, txtBtnNextPart, txtCountdown, txtItemCounter;
     private GameObject btnBackToHQ;
@@ -21,20 +20,29 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
-        HUD = GameObject.Find("HUD").gameObject;
+        HUD = GameObject.Find("HUD");
         startGamePanel = GameObject.Find("Panel-StartGame");
-        ScoreScreen = HUD.transform.GetChild(1).gameObject;
+        introPanel = GameObject.Find("Panel-Introduction");
+        deathPanel = GameObject.Find("Panel-DeathScreen");
+        ScoreScreen = GameObject.Find("ScoreScreen");
+
+        txtCountdown = GameObject.Find("Text-Countdown").GetComponent<TextMeshProUGUI>();
+        txtItemCounter = GameObject.Find("Text-Progress").GetComponent<TextMeshProUGUI>();
+
         txtSuccess = ScoreScreen.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         txtItemsCollected = ScoreScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         txtBtnNextPart = ScoreScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-        txtCountdown = HUD.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        txtCountdown.transform.gameObject.SetActive(false);
-        txtItemCounter = HUD.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         btnBackToHQ = ScoreScreen.transform.GetChild(3).gameObject;
+
+        introPanel.SetActive(false);
+        deathPanel.SetActive(false);
+        ScoreScreen.SetActive(false);
+        txtCountdown.transform.gameObject.SetActive(false);
+
         miniGameManager = GameObject.Find("Minigame").GetComponent<MiniGameManager>();
+        miniGameManager.PauseGame(true);
 
         InstantiateHearts();
-        PauseGame();
     }
 
     public void RemoveHeart()
@@ -47,24 +55,46 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    public void ShowScoreScreen(int itemsCollected, int remainingLifes)
+    public void ShowScoreScreen(int itemsCollected, int itemNr)
     {
+        
+        string foodStr;
+        miniGameManager.PauseGame(true);
         txtItemsCollected.gameObject.SetActive(true);
-        if (remainingLifes > 0)
+        txtSuccess.text = "Du hast es geschafft!";
+        
+        switch (itemNr)
         {
-            txtItemsCollected.gameObject.SetActive(true);
-            txtSuccess.text = "Du hast es geschafft!";
-            txtItemsCollected.text = "Du hast alle " + itemsCollected + " Stück Nahrung gesammelt.";
-            txtBtnNextPart.text = "Weiter";
+            case 0:
+                foodStr = "Gazellen für die Löwen";
+                break;
+            case 1:
+                foodStr = "Büschel Gras für die Zebras";
+                break;
+            case 2:
+                foodStr = "Knollen für die Warzenschweine";
+                break;
+            default:
+                foodStr = "Nahrung für die Tiere";
+                break;
+        }
+
+        txtItemsCollected.text = "Du hast " + itemsCollected + " " + foodStr + " gesammelt.";
+        txtBtnNextPart.text = "Weiter";
+        ScoreScreen.SetActive(true);
+    }
+
+    public void CloseScoreScreen()
+    {
+        ScoreScreen.SetActive(false);
+        if (miniGameManager.CheckFinished())
+        {
+            ShowEndScreen();
         }
         else
         {
-            txtSuccess.text = "Game Over";
-            txtItemsCollected.text = "Du hast entweder das falsche Essen eingesammelt oder bist zu oft gegen Hindernisse gefahren.";
-            txtBtnNextPart.text = "Noch mal";
+            startGamePanel.SetActive(true);
         }
-        
-        ScoreScreen.SetActive(true);
     }
 
     public void ShowEndScreen()
@@ -75,19 +105,14 @@ public class HUDManager : MonoBehaviour
         ScoreScreen.SetActive(true);
     }
 
-    public void CloseScoreScreen()
+    public void ShowDeathScreen(bool active)
     {
-        ScoreScreen.SetActive(false);
-        if(miniGameManager.CheckFinished())
-        {
-            ShowEndScreen();
-        }
-        else
-        {
-            startGamePanel.SetActive(true);
-        }
-        
-        PauseGame();
+        deathPanel.SetActive(active);
+    }
+
+    public void ShowIntroScreen(bool active)
+    {
+        introPanel.SetActive(active);
     }
 
     public void UpdateStartGamePanel(string explanation)
@@ -95,14 +120,16 @@ public class HUDManager : MonoBehaviour
         startGamePanel.transform.GetChild(2).transform.gameObject.GetComponent<TextMeshProUGUI>().text = explanation;
     }
 
-    public void UpdateStartGamePanel(bool active)
+    public void ShowStartGamePanel(bool active)
     {
         startGamePanel.SetActive(active);
     }
 
     public void Reset()
     {
-        currHeartCount = heartCount;
+        ShowDeathScreen(false);
+
+        currHeartCount = HEART_COUNT;
         InstantiateHearts();
         UpdateItemCounter(0);
     }
@@ -110,7 +137,7 @@ public class HUDManager : MonoBehaviour
     private void InstantiateHearts()
     {
         int i = 0;
-        for (int j = 0; j < heartCount * 2; j++)
+        for (int j = 0; j < HEART_COUNT * 2; j++)
         {
             heartsFilled[i] = HUD.transform.GetChild(0).GetChild(j).gameObject;
             heartsFilled[i].SetActive(true);
@@ -139,11 +166,5 @@ public class HUDManager : MonoBehaviour
     public void UpdateItemCounter(int i)
     {
         txtItemCounter.text = i + "/10";
-    }
-
-    private void PauseGame()
-    {
-        Time.timeScale = 0f;
-        PauseMenu.gameIsPaused = true;
     }
 }

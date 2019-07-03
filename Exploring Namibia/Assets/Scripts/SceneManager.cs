@@ -59,6 +59,16 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(8);
     }
 
+    public void OpenMinigame02()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(12);
+    }
+
+    public void OpenMinigame03()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(12);
+    }
+
     public void OpenProgress()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(9);

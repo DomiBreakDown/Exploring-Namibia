@@ -6,15 +6,17 @@ using UnityEngine;
 public class ChangeText : MonoBehaviour
 {
     private TextMeshProUGUI text;
+    private GameObject leaveButton;
     private int textIndex = 0;
 
-    private readonly static int lineCount = 7;
-    private string[] lines = new string[lineCount];
-    private bool back = false;
+    private const int lineCount = 7;
+    private readonly string[] lines = new string[lineCount];
 
     private void Start()
     {
-        text = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text = GameObject.Find("Text-Bubble").GetComponent<TextMeshProUGUI>();
+        leaveButton = GameObject.Find("Button-Leave").gameObject;
+        leaveButton.SetActive(false);
         InitLines();
         ResetText();
     }
@@ -27,23 +29,16 @@ public class ChangeText : MonoBehaviour
 
     public void ChangeBubbleText()
     {
-        if (back)
+        textIndex++;
+
+        if (textIndex < lineCount - 1)
         {
-            back = false;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            text.text = lines[textIndex];
         }
         else
         {
-            if (textIndex + 1 < lineCount)
-            {
-                textIndex++;
-                text.text = lines[textIndex];
-            }
-            else
-            {
-                text.text = "Zurück";
-                back = true;
-            }
+            text.text = lines[lineCount - 1];
+            leaveButton.SetActive(true);
         }
     }
 
