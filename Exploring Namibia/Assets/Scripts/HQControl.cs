@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HQControl : MonoBehaviour
 {
-    private int minigamesDone = 0;
-    private int maxMinigames = 3;
+    private int minigamesDone;
+    private int maxMinigames = 2;
     private static bool firstTime = true;
+    private static bool showEndPanel = true;
     public Button endGameButton;
     public GameObject startupPanel;
-
-    // Start is called before the first frame update
+    public GameObject endPanel;
+    
     void Start()
     {
-        minigamesDone = PlayerPrefs.GetInt("minigame1") + PlayerPrefs.GetInt("minigame2") + PlayerPrefs.GetInt("minigame3");
+        minigamesDone = PlayerPrefs.GetInt("minigame1") + PlayerPrefs.GetInt("minigame2");
         if (minigamesDone == maxMinigames)
         {
             endGameButton.gameObject.SetActive(true);
+            if(showEndPanel == true)
+            {
+                endPanel.SetActive(true);
+            }
         }
         if (firstTime == false)
         {
@@ -25,15 +31,15 @@ public class HQControl : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CloseStartupWindow()
     {
         startupPanel.SetActive(false);
         firstTime = false;
+    }
+
+    public void CloseEndWindow()
+    {
+        endPanel.SetActive(false);
+        showEndPanel = false;
     }
 }

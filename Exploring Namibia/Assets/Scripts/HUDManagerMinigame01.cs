@@ -29,10 +29,10 @@ public class HUDManagerMinigame01 : MonoBehaviour
         txtCountdown = GameObject.Find("Text-Countdown").GetComponent<TextMeshProUGUI>();
         txtItemCounter = GameObject.Find("Text-Progress").GetComponent<TextMeshProUGUI>();
 
-        txtSuccess = ScoreScreen.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        txtItemsCollected = ScoreScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        txtBtnNextPart = ScoreScreen.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-        btnBackToHQ = ScoreScreen.transform.GetChild(3).gameObject;
+        txtSuccess = ScoreScreen.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        txtItemsCollected = ScoreScreen.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        txtBtnNextPart = ScoreScreen.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
+        btnBackToHQ = ScoreScreen.transform.GetChild(4).gameObject;
 
         introPanel.SetActive(false);
         deathPanel.SetActive(false);

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
@@ -37,13 +35,13 @@ public class SceneManager : MonoBehaviour
     }
 
     //To call National Park
-    public void OpenNationalPark()
+    public void OpenAnimalRescueStation()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     //To call Animal Rescue Station
-    public void OpenAnimalRescueStation()
+    public void OpenNationalPark()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(6);
     }
@@ -64,9 +62,9 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(12);
     }
 
-    public void OpenMinigame03()
+    public void OpenOutro()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(12);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(13);
     }
 
     public void OpenProgress()

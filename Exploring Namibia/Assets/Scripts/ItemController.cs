@@ -33,7 +33,7 @@ public class ItemController : MonoBehaviour
         if(itemNr == 0)
         {
             // gazelle has bigger image -> double the size of the collider
-            GetComponent<BoxCollider2D>().size = new Vector2(1f, 1f);
+            GetComponent<BoxCollider2D>().size = new Vector2(1.2f, 1f);
         }
         else
         {
