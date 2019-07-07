@@ -10,6 +10,7 @@ public class OutroController : MonoBehaviour
     private void Start()
     {
         videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Outro.mp4");
     }
 
     private void Update()

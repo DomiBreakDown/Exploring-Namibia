@@ -10,6 +10,7 @@ public class IntroController : MonoBehaviour
     private void Start()
     {
         videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Intro.mp4");
     }
 
     private void Update()
