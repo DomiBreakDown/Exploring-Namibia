@@ -7,9 +7,8 @@ public class SecretSettingsControl : MonoBehaviour
 {
     public Toggle checkboxMinigame1;
     public Toggle checkboxMinigame2;
-    public Toggle checkboxMinigame3;
     
-    void Start()
+    public void CheckCheckbox()
     {
         if (PlayerPrefs.GetInt("minigame1") == 1)
         {
@@ -26,12 +25,10 @@ public class SecretSettingsControl : MonoBehaviour
         if (checkboxMinigame1.isOn)
         {
             PlayerPrefs.SetInt("minigame1", 1);
-            PlayerPrefs.SetInt("minigame1Permission", 1);
         }
         if (!checkboxMinigame1.isOn)
         {
             PlayerPrefs.SetInt("minigame1", 0);
-            PlayerPrefs.SetInt("minigame1Permission", 0);
         }
             
     }
@@ -41,13 +38,11 @@ public class SecretSettingsControl : MonoBehaviour
         if (checkboxMinigame2.isOn)
         {
             PlayerPrefs.SetInt("minigame2", 1);
-            PlayerPrefs.SetInt("minigame2Permission", 1);
         }
             
         if (!checkboxMinigame2.isOn)
         {
             PlayerPrefs.SetInt("minigame2", 0);
-            PlayerPrefs.SetInt("minigame2Permission", 0);
         }
             
     }
